@@ -221,7 +221,7 @@ def uninstall_packages():
 #### Removing Upstream OpenvSwitch
 ovs_package_name=$(rpm -qa | awk -F- \
 '/^(openvswitch[0-9]+\.[0-9]+-|openvswitch-2)/{print $1}')
-yum remove -y $ovs_package_name
+[[ $ovs_package_name == open* ]] && yum remove -y "$ovs_package_name"
 yum clean all
 '''
     write_to_file(constants.SCRIPT_NAME, cmd)
